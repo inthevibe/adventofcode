@@ -19,6 +19,7 @@ func main() {
 
 	var LL []int
 	var RR []int
+	RC := make(map[int]int)
 
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
@@ -29,6 +30,7 @@ func main() {
 		right, err = strconv.Atoi(parts[1])
 		LL = append(LL, left)
 		RR = append(RR, right)
+		RC[right]++
 	}
 
 	sort.Ints(LL)
@@ -42,5 +44,11 @@ func main() {
 		total += distance
 	}
 
+	total2 := 0
+	for i := 0; i < len(LL); i++ {
+		total2 += LL[i] * RC[LL[i]]
+	}
+
 	fmt.Println("The total distance is:", total)
+	fmt.Println("The total distance 2 is:", total2)
 }
